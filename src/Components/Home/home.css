@@ -1,0 +1,190 @@
+.tab-header{
+font-family: 'Roboto',sans-serif !important; 
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 30px;
+
+}
+.table-container{
+    border-collapse: collapse !important;
+}
+.table-container> tbody> tr {
+    border: 5px solid #e4f3ef;
+}
+.tab-header> .ui> .active{
+    color: #1D54B4 !important;
+}
+.tab-header> .ui> .item{
+   border-right: 1px solid #C4C4C4 !important;
+}
+.content{
+    display: none;
+    background-color: white;
+    margin-top: 1rem;
+}
+.toggleBtn{
+    font-size: 12px;
+}
+tbody> tr> td {
+    border: none !important;
+}
+.taskName{
+    font-family: 'Roboto',sans-serif !important; 
+font-style: normal;
+font-weight: bold;
+font-size: 12px;
+line-height: 14px;
+ 
+
+color: #2055B5;
+}
+.dottedUnderline{
+    border-bottom: 1px dotted;
+}
+.ui.attached.tabular.menu {
+    background-color: #E5E5E5;
+}
+.labelTag{
+    font-family: 'Roboto',sans-serif !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 10px !important;
+    text-align: center;
+    width: 100px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase !important;
+    color: #FFFFFF;
+    border-radius: 18px !important;
+}
+.purple{
+    background: #684999;
+}
+th {
+    text-transform: uppercase !important;
+    color: #666666 !important;
+}
+.one.wide {
+    width: 2% !important;
+    background-color: white !important;
+}
+.checkColumn {
+    width: 4%;
+    text-align: center !important;
+}
+.checkColumn> .ui> label {
+    top: 5px !important;
+}
+.subTaskIcon{
+    display: inline !important;
+    margin-right: 10px !important;
+}
+.assignDrops{
+    border: 1px solid #E5E5E5;
+box-sizing: border-box;
+border-radius: 28px;
+font-family: 'Roboto',sans-serif !important;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 24px;
+}
+
+.assignDrops> .text{
+    min-width: 160px !important;
+    height: 40px;
+    text-align: left;
+    padding: 6px;
+}
+.assignDrops> .icon{
+    height: 2em !important;
+    width: 2em !important;
+    font-size: 16px !important;
+}
+.assignDrops input[type="text"] {
+    border: 1px solid #E5E5E5 !important;
+    box-sizing: border-box !important;
+    border-radius: 20px !important;
+}
+.assignDrops> .menu> .input{
+   margin: 5px 5px !important;
+}
+/* .assignDrops> .menu{
+    background: #ECF5FA !important;
+} */
+
+.assignDrops> .menu> .search> .icon {
+    background-color: #1D54B4;
+    border-radius: 0px 14.5px 14.5px 0px !important;
+    opacity: 1 !important;
+    color: white !important;
+}
+.assignDrops> .text> .ui.label {
+    width: 32px;
+    height: 32px;
+    padding-top: 10px !important;
+}
+.timeProgress {
+    border: 1px solid #E5E5E5 !important;
+    position: relative !important;
+    text-align: center !important;
+    border-radius: 20px !important;
+    background: white !important;
+    width: 200px !important;
+    margin: 0 !important;
+}
+.timeProgress> .bar >.progress{
+    position: relative !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    right: auto !important;
+    top: 5px !important;
+    width: 100px !important;
+    font-family: 'Roboto',sans-serif !important;
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+    display: flex;
+    align-items: center;
+    color: #666666 !important;
+
+}
+.timeProgress> .bar{
+    border-radius: 20px !important;
+    box-sizing: border-box;
+    
+}
+.orangeProgress> .bar{
+    background: rgba(244, 175, 100, 0.5) !important;
+    border: 1px solid #F4AF64 !important;
+    width: 180px !important;
+}
+
+.purpleProgress> .bar {
+    background: rgba(95, 128, 185, 0.5) !important;
+    border: 1px solid #5F80B9 !important;
+    width: 120px !important;
+}
+.purpleProgress> .bar> .progress {
+    width: 40px !important;
+}
+
+.greenProgress> .bar {
+    background: rgba(128, 196, 131, 0.5) !important;
+    border: 1px solid #80C483 !important;
+    width: 35px !important;
+}
+.greenProgress> .bar> .progress {
+    width: 1px !important;
+    left: 20px !important;
+}
+.Exchange{
+    background: #F4AF64 !important;
+    color: white !important;
+}
+.Commercial{
+    background: #707683 !important;
+    color: white !important;
+}
