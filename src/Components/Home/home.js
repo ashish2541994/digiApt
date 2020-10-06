@@ -142,7 +142,7 @@ const panes = [
                       content: <Image src={rightArrow}></Image>,
                       image: true,
                     }}
-                    totalPages={4}
+                    totalPages={5}
                     siblingRange={1}
                   />
                 </div>
