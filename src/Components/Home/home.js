@@ -145,15 +145,6 @@ const panes = [
                     totalPages={4}
                     siblingRange={1}
                   />
-                  {/* <Pagination
-                    boundaryRange={0}
-                    defaultActivePage={1}
-                    ellipsisItem={null}
-                    firstItem={null}
-                    lastItem={null}
-                    siblingRange={1}
-                    totalPages={10}
-                  /> */}
                 </div>
               </Grid.Column>
               <Grid.Column width={1} className="itemPerPage" textAlign="right">
