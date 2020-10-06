@@ -12,7 +12,7 @@ import {
   Image,
   Label,
   Progress,
-  Menu
+  Menu,
 } from "semantic-ui-react";
 import "./home.css";
 import setting from "../../assets/settings.png";
@@ -23,11 +23,8 @@ import leftArrow from "../../assets/leftArrow.png";
 import rightArrow from "../../assets/rightArrow.png";
 import downSort from "../../assets/downSort.png";
 import upSort from "../../assets/upSort.png";
-const options = [
-  { key: 1, text: "Choice 1", value: 1 },
-  { key: 2, text: "Choice 2", value: 2 },
-  { key: 3, text: "Choice 3", value: 3 },
-];
+
+import configData from "../configData.json";
 
 const friendOptions = [
   {
@@ -107,7 +104,7 @@ const panes = [
                   iconPosition="left"
                   fluid
                   multiple
-                  options={options}
+                  options={configData.options}
                   selection
                 />
               </Grid.Column>
@@ -202,23 +199,26 @@ const panes = [
                   <Label className="rightIcon" as="a">
                     SUBTASKS
                     <Image className="sortIcon" src={downSort}></Image>
-                  </Label></Table.HeaderCell>
+                  </Label>
+                </Table.HeaderCell>
                 <Table.HeaderCell className="taskName">
                   <Label className="rightIcon" as="a">
-                  ASSIGNED TO
+                    ASSIGNED TO
                     <Image className="sortIcon" src={downSort}></Image>
                   </Label>
-                  </Table.HeaderCell>
+                </Table.HeaderCell>
                 <Table.HeaderCell className="taskName">
                   <Label className="rightIcon" as="a">
-                  Step
+                    Step
                     <Image className="sortIcon" src={downSort}></Image>
-                  </Label></Table.HeaderCell>
+                  </Label>
+                </Table.HeaderCell>
                 <Table.HeaderCell className="taskName">
                   <Label className="rightIcon dueDate" as="a">
-                  Due Date
+                    Due Date
                     <Image className="sortIcon" src={upSort}></Image>
-                  </Label></Table.HeaderCell>
+                  </Label>
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
@@ -252,6 +252,9 @@ const panes = [
                     progress="value"
                     value="09/04/2020  @ 9:00 AM"
                   />
+                  <Label className="rightIcon expandIcon dueDate" as="a">
+                    <Image className="sortIcon" src={rightArrow}></Image>
+                  </Label>
                 </Table.Cell>
               </Table.Row>
 
@@ -289,7 +292,9 @@ const panes = [
                     progress="value"
                     value="09/09/2020  @ 5:00 PM"
                   />
-                  
+                  <Label className="rightIcon expandIcon dueDate" as="a">
+                    <Image className="sortIcon" src={rightArrow}></Image>
+                  </Label>
                 </Table.Cell>
               </Table.Row>
 
@@ -327,6 +332,9 @@ const panes = [
                     progress="value"
                     value="09/18/2020  @ 10:30 AM"
                   />
+                  <Label className="rightIcon expandIcon dueDate" as="a">
+                    <Image className="sortIcon" src={rightArrow}></Image>
+                  </Label>
                 </Table.Cell>
               </Table.Row>
 
@@ -359,6 +367,9 @@ const panes = [
                     progress="value"
                     value="No due date"
                   />
+                  <Label className="rightIcon expandIcon dueDate" as="a">
+                    <Image className="sortIcon" src={rightArrow}></Image>
+                  </Label>
                 </Table.Cell>
               </Table.Row>
             </Table.Body>
@@ -369,11 +380,21 @@ const panes = [
   },
   { menuItem: "ASSIGNED TASKS", pane: "Tab 2 Content" },
   { menuItem: "ALL TASKS", pane: "Tab 3 Content" },
-  { menuItem: <Menu.Item key='messages' className="to-right">Assign Task(s)</Menu.Item>, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+  {
+    menuItem: (
+      <Menu.Item key="messages" className="to-right">
+        Assign Task(s)
+      </Menu.Item>
+    ),
+    render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>,
+  },
 ];
 
 const Home = () => (
-  <Tab className="tab-header" panes={panes} renderActiveOnly={false} />
+  <div>
+    <Tab className="tab-header" panes={panes} renderActiveOnly={false} />
+    <div>{configData.SERVER_URL}</div>
+  </div>
 );
 
 export default Home;

@@ -359,3 +359,9 @@ color: #333333 !important
     margin-top: 7px;
     margin-bottom: 7px;
   }
+  .expandIcon{
+    width: 20px !important;
+    float: right;
+    display: inline;
+    margin-top: -30px !important;
+  }
