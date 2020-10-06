@@ -12,11 +12,17 @@ import {
   Image,
   Label,
   Progress,
+  Menu
 } from "semantic-ui-react";
 import "./home.css";
 import setting from "../../assets/settings.png";
 import subtaskIcon from "../../assets/Union.png";
-
+import firstItem from "../../assets/firstItem.png";
+import lastItem from "../../assets/lastItem.png";
+import leftArrow from "../../assets/leftArrow.png";
+import rightArrow from "../../assets/rightArrow.png";
+import downSort from "../../assets/downSort.png";
+import upSort from "../../assets/upSort.png";
 const options = [
   { key: 1, text: "Choice 1", value: 1 },
   { key: 2, text: "Choice 2", value: 2 },
@@ -25,42 +31,42 @@ const options = [
 
 const friendOptions = [
   {
-    key: "Jenny Hess",
-    text: "Jenny Hess",
-    value: "Jenny Hess",
+    key: "Derek Roberts",
+    text: "Derek Roberts",
+    value: "Derek Roberts",
     image: (
-      <Label as="a" circular>
+      <Label className="Derek" as="a" circular>
+        D
+      </Label>
+    ),
+  },
+  {
+    key: "Jonathan Robertson",
+    text: "Jonathan Robertson",
+    value: "Jonathan Robertson",
+    image: (
+      <Label className="Jonathan" as="a" circular>
         J
       </Label>
     ),
   },
   {
-    key: "Elliot Fu",
-    text: "Elliot Fu",
-    value: "Elliot Fu",
+    key: "Nichole Smith",
+    text: "Nichole Smith",
+    value: "Nichole Smith",
     image: (
-      <Label as="a" circular>
-        E
+      <Label className="Nichole" as="a" circular>
+        N
       </Label>
     ),
   },
   {
-    key: "Stevie Feliciano",
-    text: "Stevie Feliciano",
-    value: "Stevie Feliciano",
+    key: "Susan Miller",
+    text: "Susan Miller",
+    value: "Susan Miller",
     image: (
-      <Label as="a" circular>
+      <Label className="Susan" as="a" circular>
         S
-      </Label>
-    ),
-  },
-  {
-    key: "Christian",
-    text: "Christian",
-    value: "Christian",
-    image: (
-      <Label as="a" circular>
-        C
       </Label>
     ),
   },
@@ -84,32 +90,65 @@ const panes = [
         <div className="content">
           <Grid columns={9}>
             <Grid.Row>
-              <Grid.Column>
-                <Checkbox className="toggleBtn" label="Multi Sort" toggle />
+              <Grid.Column width={2}>
+                <Checkbox
+                  className="toggleBtn"
+                  label="Multi Sort"
+                  defaultChecked
+                  toggle
+                />
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column width={2}>
                 <Dropdown
                   placeholder="Clear All Filters"
                   icon="close"
+                  className="filterDrop"
                   clearable
+                  iconPosition="left"
                   fluid
                   multiple
                   options={options}
                   selection
                 />
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column width={2}>
                 <div class="ui ">Results: 1 to 5 of 144</div>
               </Grid.Column>
-              <Grid.Column>
-                <div class="ui ">Items per page</div>
+              <Grid.Column className="itemPerPage" width={1} textAlign="right">
+                <div class="ui  ">Items per page</div>
               </Grid.Column>
-              <Grid.Column>
-                <Input type="number" />
+              <Grid.Column width={1} textAlign="left">
+                <Input className="itemPage" value="10" type="number" />
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column width={4} textAlign="left">
                 <div>
                   <Pagination
+                    className="tablePaginator"
+                    defaultActivePage={1}
+                    ellipsisItem={{
+                      content: <Icon name="ellipsis horizontal" />,
+                      icon: true,
+                    }}
+                    firstItem={{
+                      content: <Image src={lastItem}></Image>,
+                      image: true,
+                    }}
+                    lastItem={{
+                      content: <Image src={firstItem}></Image>,
+                      image: true,
+                    }}
+                    prevItem={{
+                      content: <Image src={leftArrow}></Image>,
+                      image: true,
+                    }}
+                    nextItem={{
+                      content: <Image src={rightArrow}></Image>,
+                      image: true,
+                    }}
+                    totalPages={4}
+                    siblingRange={1}
+                  />
+                  {/* <Pagination
                     boundaryRange={0}
                     defaultActivePage={1}
                     ellipsisItem={null}
@@ -117,17 +156,22 @@ const panes = [
                     lastItem={null}
                     siblingRange={1}
                     totalPages={10}
-                  />
+                  /> */}
                 </div>
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column width={1} className="itemPerPage" textAlign="right">
                 <div class="ui ">Go to page</div>
               </Grid.Column>
-              <Grid.Column>
-                <Input type="number" />
+              <Grid.Column width={1} className="nopad">
+                <Input className="itemPage" value="6" type="number" />
               </Grid.Column>
-              <Grid.Column>
-                <div class="ui ">Go > </div>
+              <Grid.Column width={1} className="nopad" textAlign="left">
+                <div class="ui ">of 10</div>
+              </Grid.Column>
+              <Grid.Column width={1}>
+                <div class="ui go">
+                  <span>Go ></span>{" "}
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -143,13 +187,38 @@ const panes = [
                   <Checkbox />
                 </Table.HeaderCell>
                 <Table.HeaderCell className="taskName">
-                  Task Name
+                  <Label className="rightIcon" as="a">
+                    Task Name
+                    <Image className="sortIcon" src={downSort}></Image>
+                  </Label>
                 </Table.HeaderCell>
-                <Table.HeaderCell>LOB</Table.HeaderCell>
-                <Table.HeaderCell>Subtasks</Table.HeaderCell>
-                <Table.HeaderCell>ASSIGNED TO</Table.HeaderCell>
-                <Table.HeaderCell>Step</Table.HeaderCell>
-                <Table.HeaderCell>Due Date</Table.HeaderCell>
+                <Table.HeaderCell className="taskName">
+                  <Label className="rightIcon" as="a">
+                    LOB
+                    <Image className="sortIcon" src={downSort}></Image>
+                  </Label>
+                </Table.HeaderCell>
+                <Table.HeaderCell className="taskName">
+                  <Label className="rightIcon" as="a">
+                    SUBTASKS
+                    <Image className="sortIcon" src={downSort}></Image>
+                  </Label></Table.HeaderCell>
+                <Table.HeaderCell className="taskName">
+                  <Label className="rightIcon" as="a">
+                  ASSIGNED TO
+                    <Image className="sortIcon" src={downSort}></Image>
+                  </Label>
+                  </Table.HeaderCell>
+                <Table.HeaderCell className="taskName">
+                  <Label className="rightIcon" as="a">
+                  Step
+                    <Image className="sortIcon" src={downSort}></Image>
+                  </Label></Table.HeaderCell>
+                <Table.HeaderCell className="taskName">
+                  <Label className="rightIcon dueDate" as="a">
+                  Due Date
+                    <Image className="sortIcon" src={upSort}></Image>
+                  </Label></Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
@@ -167,14 +236,9 @@ const panes = [
                 <Table.Cell>
                   <Label className="purple labelTag"> Medicare</Label>
                 </Table.Cell>
+                <Table.Cell></Table.Cell>
                 <Table.Cell>
-                  <div>
-                    <Image className="subTaskIcon" src={subtaskIcon} />
-                    <span>2</span>
-                  </div>
-                </Table.Cell>
-                <Table.Cell>
-                <Dropdown
+                  <Dropdown
                     inline
                     className="assignDrops"
                     options={friendOptions}
@@ -207,7 +271,7 @@ const panes = [
                 <Table.Cell>
                   <div>
                     <Image className="subTaskIcon" src={subtaskIcon} />
-                    <span>3</span>
+                    <span className="noOfTask">3</span>
                   </div>
                 </Table.Cell>
                 <Table.Cell>
@@ -225,8 +289,10 @@ const panes = [
                     progress="value"
                     value="09/09/2020  @ 5:00 PM"
                   />
+                  
                 </Table.Cell>
               </Table.Row>
+
               <Table.Row>
                 <Table.Cell width="1"></Table.Cell>
                 <Table.Cell className="checkColumn" collapsing>
@@ -243,7 +309,7 @@ const panes = [
                 <Table.Cell>
                   <div>
                     <Image className="subTaskIcon" src={subtaskIcon} />
-                    <span>3</span>
+                    <span className="noOfTask">2</span>
                   </div>
                 </Table.Cell>
                 <Table.Cell>
@@ -263,6 +329,38 @@ const panes = [
                   />
                 </Table.Cell>
               </Table.Row>
+
+              <Table.Row>
+                <Table.Cell width="1"></Table.Cell>
+                <Table.Cell className="checkColumn" collapsing>
+                  <Checkbox />
+                </Table.Cell>
+                <Table.Cell className="taskName">
+                  <div class="ui taskName">
+                    <span class="dottedUnderline">Task name</span>
+                  </div>
+                </Table.Cell>
+                <Table.Cell>
+                  <Label className="Medicaid labelTag"> Medicaid</Label>
+                </Table.Cell>
+                <Table.Cell></Table.Cell>
+                <Table.Cell>
+                  <Dropdown
+                    inline
+                    className="assignDrops"
+                    options={friendOptions}
+                    defaultValue={friendOptions[4].value}
+                  />
+                </Table.Cell>
+                <Table.Cell>In Review</Table.Cell>
+                <Table.Cell>
+                  <Progress
+                    className="timeProgress noProgress"
+                    progress="value"
+                    value="No due date"
+                  />
+                </Table.Cell>
+              </Table.Row>
             </Table.Body>
           </Table>
         </div>
@@ -271,6 +369,7 @@ const panes = [
   },
   { menuItem: "ASSIGNED TASKS", pane: "Tab 2 Content" },
   { menuItem: "ALL TASKS", pane: "Tab 3 Content" },
+  { menuItem: <Menu.Item key='messages' className="to-right">Assign Task(s)</Menu.Item>, render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
 ];
 
 const Home = () => (
