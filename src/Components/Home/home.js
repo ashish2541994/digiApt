@@ -1,329 +1,168 @@
 import React, { Component } from "react";
 import { Tab } from "semantic-ui-react";
-import { Grid } from "semantic-ui-react";
-import {
-  Checkbox,
-  Dropdown,
-  Pagination,
-  Input,
-  Button,
-  Icon,
-  Table,
-  Image,
-  Label,
-  Progress,
-  Menu,
-} from "semantic-ui-react";
+import { Label, Menu } from "semantic-ui-react";
 import "./home.css";
-import setting from "../../assets/settings.png";
-import subtaskIcon from "../../assets/Union.png";
-import firstItem from "../../assets/firstItem.png";
-import lastItem from "../../assets/lastItem.png";
-import leftArrow from "../../assets/leftArrow.png";
-import rightArrow from "../../assets/rightArrow.png";
-import downSort from "../../assets/downSort.png";
-import upSort from "../../assets/upSort.png";
-import { Loader,  Segment } from "semantic-ui-react";
-import configData from "../configData.json";
+
+import { Loader, Segment, Button, Dropdown } from "semantic-ui-react";
+var parse = require("html-react-parser");
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: [],
+      files: [
+        {
+          key: "Untitled",
+          text: "Untitled",
+          value: "Untitled",
+          image: (
+            <Label className="Derek" as="a" circular>
+              U
+            </Label>
+          ),
+        },
+      ],
     };
+    this.myRef = React.createRef();
   }
   componentDidMount() {
-   
-      this.setState({ tableRow: configData.tableRow });
-   
+    this.loadRectangle();
   }
-  handleFilterChange = (e, { value }) => {
-    this.setState({ filter: value }, this.filterTable);
-  };
-  filterTable = () => {
-    let tableData = configData.tableRow;
-    if (this.state.filter.length > 0) {
-      let filterData = this.state.filter;
-      var filteredTable = tableData.filter(function (row) {
-        return filterData.includes(row.lob);
-      });
-      this.setState({ tableRow: filteredTable });
-      console.log(this.state);
-    }
-  };
-  render() {
-    const friendOptions = [
-      {
-        key: "Derek Roberts",
-        text: "Derek Roberts",
-        value: "Derek Roberts",
+  loadRectangle = () => {
+    var files = this.state.files;
+    let filenameArray = Object.keys(localStorage);
+    for (var i = 0; i < filenameArray.length; i++) {
+      console.log(filenameArray);
+      let savedHtml = {
+        key: filenameArray[i],
+        text: filenameArray[i],
+        value: filenameArray[i],
         image: (
           <Label className="Derek" as="a" circular>
-            D
+            {filenameArray[i].charAt(0).toUpperCase()}
           </Label>
         ),
-      },
-      {
-        key: "Jonathan Robertson",
-        text: "Jonathan Robertson",
-        value: "Jonathan Robertson",
-        image: (
-          <Label className="Jonathan" as="a" circular>
-            J
-          </Label>
-        ),
-      },
-      {
-        key: "Nichole Smith",
-        text: "Nichole Smith",
-        value: "Nichole Smith",
-        image: (
-          <Label className="Nichole" as="a" circular>
-            N
-          </Label>
-        ),
-      },
-      {
-        key: "Susan Miller",
-        text: "Susan Miller",
-        value: "Susan Miller",
-        image: (
-          <Label className="Susan" as="a" circular>
-            S
-          </Label>
-        ),
-      },
-      {
-        key: "Unassigned",
-        text: "Unassigned",
-        value: "Unassigned",
-        image: (
-          <Label as="a" circular>
-            U
-          </Label>
-        ),
-      },
-    ];
+      };
+      if (!this.state.files.includes(savedHtml)) {
+        files.push(savedHtml);
+      }
+    }
+    console.log(files);
+    this.setState({ files: files }, this.initDrawing);
+  };
+  initDrawing = () => {
+    console.log(this.myRef, this.state);
+    this.initDraw(this.myRef.current);
+  };
 
-    const panes = [
-      {
-        menuItem: "UNASSIGNED TASKS",
-        pane: (
-          <div>
-            <div className="content">
-              <Grid columns={9}>
-                <Grid.Row>
-                  <Grid.Column width={2}>
-                    <Checkbox
-                      className="toggleBtn"
-                      label="Multi Sort"
-                      defaultChecked
-                      toggle
-                    />
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                    <Dropdown
-                      placeholder="Clear All Filters"
-                      icon="close"
-                      className="filterDrop"
-                      clearable
-                      iconPosition="left"
-                      fluid
-                      multiple
-                      options={configData.options}
-                      selection
-                      onChange={this.handleFilterChange}
-                    />
-                  </Grid.Column>
-                  <Grid.Column width={2}>
-                    <div class="ui ">Results: 1 to 5 of 144</div>
-                  </Grid.Column>
-                  <Grid.Column
-                    className="itemPerPage"
-                    width={1}
-                    textAlign="right"
-                  >
-                    <div class="ui  ">Items per page</div>
-                  </Grid.Column>
-                  <Grid.Column width={1} textAlign="left">
-                    <Input className="itemPage" value="10" type="number" />
-                  </Grid.Column>
-                  <Grid.Column width={4} textAlign="left">
-                    <div>
-                      <Pagination
-                        className="tablePaginator"
-                        defaultActivePage={1}
-                        ellipsisItem={{
-                          content: <Icon name="ellipsis horizontal" />,
-                          icon: true,
-                        }}
-                        firstItem={{
-                          content: <Image src={lastItem}></Image>,
-                          image: true,
-                        }}
-                        lastItem={{
-                          content: <Image src={firstItem}></Image>,
-                          image: true,
-                        }}
-                        prevItem={{
-                          content: <Image src={leftArrow}></Image>,
-                          image: true,
-                        }}
-                        nextItem={{
-                          content: <Image src={rightArrow}></Image>,
-                          image: true,
-                        }}
-                        totalPages={5}
-                        siblingRange={1}
-                      />
-                    </div>
-                  </Grid.Column>
-                  <Grid.Column
-                    width={1}
-                    className="itemPerPage"
-                    textAlign="right"
-                  >
-                    <div class="ui ">Go to page</div>
-                  </Grid.Column>
-                  <Grid.Column width={1} className="nopad">
-                    <Input className="itemPage" value="6" type="number" />
-                  </Grid.Column>
-                  <Grid.Column width={1} className="nopad" textAlign="left">
-                    <div class="ui ">of 10</div>
-                  </Grid.Column>
-                  <Grid.Column width={1}>
-                    <div class="ui go">
-                      <span>Go ></span>{" "}
-                    </div>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </div>
-            <div className="table">
-              <Table className="table-container" celled compact definition>
-                <Table.Header fullWidth>
-                  <Table.Row>
-                    <Table.HeaderCell width="1">
-                      <Image src={setting} />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="checkColumn">
-                      <Checkbox />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon" as="a">
-                        Task Name
-                        <Image className="sortIcon" src={downSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon" as="a">
-                        LOB
-                        <Image className="sortIcon" src={downSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon" as="a">
-                        SUBTASKS
-                        <Image className="sortIcon" src={downSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon" as="a">
-                        ASSIGNED TO
-                        <Image className="sortIcon" src={downSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon" as="a">
-                        Step
-                        <Image className="sortIcon" src={downSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                    <Table.HeaderCell className="taskName">
-                      <Label className="rightIcon dueDate" as="a">
-                        Due Date
-                        <Image className="sortIcon" src={upSort}></Image>
-                      </Label>
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                {this.state.tableRow ? (
-                <Table.Body>
-                  {this.state.tableRow.map((row, index) => {
-                    return (
-                      <Table.Row className="borderTab">
-                        <Table.Cell width="1"></Table.Cell>
-                        <Table.Cell className="checkColumn" collapsing>
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="taskName">
-                          <div class="ui taskName">
-                            <span class="dottedUnderline">Task name</span>
-                          </div>
-                        </Table.Cell>
-                        <Table.Cell>
-                          <Label className="purple labelTag"> {row.lob}</Label>
-                        </Table.Cell>
-                        <Table.Cell></Table.Cell>
-                        <Table.Cell>
-                          <Dropdown
-                            inline
-                            className="assignDrops"
-                            options={friendOptions}
-                            defaultValue={friendOptions[4].value}
-                          />
-                        </Table.Cell>
-                        <Table.Cell>{row.step}</Table.Cell>
-                        <Table.Cell>
-                          <Progress
-                            className={"timeProgress " + row.progressClass}
-                            progress="value"
-                            value={row.dueDate}
-                          />
-                          <Label
-                            className="rightIcon expandIcon dueDate"
-                            as="a"
-                          >
-                            <Image
-                              className="sortIcon"
-                              src={rightArrow}
-                            ></Image>
-                          </Label>
-                        </Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-               ) : (
-                <Segment>
-                  <Loader active />
-                </Segment>
-              )}
-              </Table>
-            </div>
-          </div>
+  saveArt = () => {
+    var fileName = prompt("Please enter your File Name to Save", "Untitled");
+    if (fileName != null) {
+      localStorage.setItem(fileName, this.myRef.current.innerHTML);
+      var files = this.state.files;
+      let savedHtml = {
+        key: fileName,
+        text: fileName,
+        value: fileName,
+        image: (
+          <Label className="Derek" as="a" circular>
+            {fileName.charAt(0).toUpperCase()}
+          </Label>
         ),
-      },
-      { menuItem: "ASSIGNED TASKS", pane: "Tab 2 Content" },
-      { menuItem: "ALL TASKS", pane: "Tab 3 Content" },
-      {
-        menuItem: (
-          <Menu.Item key="messages" className="to-right">
-            Assign Task(s)
-          </Menu.Item>
-        ),
-        render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>,
-      },
-    ];
+      };
+      files.push(savedHtml);
+      console.log(files);
+      this.setState({ files: files }, this.initDrawing);
+    }
+  };
 
+  setMousePosition = (e, mouse) => {
+    var ev = e || window.event; //Moz || IE
+    if (ev.pageX) {
+      //Moz
+      mouse.x = ev.pageX + window.pageXOffset;
+      mouse.y = ev.pageY + window.pageYOffset;
+    } else if (ev.clientX) {
+      //IE
+      mouse.x = ev.clientX + document.body.scrollLeft;
+      mouse.y = ev.clientY + document.body.scrollTop;
+    }
+  };
+
+  initDraw = (canvas) => {
+    var mouse = {
+      x: 0,
+      y: 0,
+      startX: 0,
+      startY: 0,
+    };
+    var element = null;
+    var self = this;
+    canvas.onmousemove = function (e) {
+      self.setMousePosition(e, mouse);
+      if (element !== null) {
+        element.style.width = Math.abs(mouse.x - mouse.startX) + "px";
+        element.style.height = Math.abs(mouse.y - mouse.startY) + "px";
+        element.style.left =
+          mouse.x - mouse.startX < 0 ? mouse.x + "px" : mouse.startX + "px";
+        element.style.top =
+          mouse.y - mouse.startY < 0 ? mouse.y + "px" : mouse.startY + "px";
+      }
+    };
+
+    canvas.onclick = function (e) {
+      if (element !== null) {
+        element = null;
+        canvas.style.cursor = "default";
+        console.log("finsihed.");
+      } else {
+        console.log("begun.");
+        mouse.startX = mouse.x;
+        mouse.startY = mouse.y;
+        element = document.createElement("div");
+        element.className = "rectangle";
+        element.style.left = mouse.x + "px";
+        element.style.top = mouse.y + "px";
+        canvas.appendChild(element);
+        canvas.style.cursor = "crosshair";
+      }
+    };
+  };
+
+  loadFile = (e, { value }) => {
+    //this.setState({ value })
+    console.log(value);
+    let html = localStorage.getItem(value);
+    this.loadDraw(this.myRef.current, html);
+  };
+  loadDraw = (canvas, html) => {
+    let htmlEncode = parse(html);
+    canvas.innerHTML = "";
+    canvas.insertAdjacentHTML("beforeend", html);
+    canvas.style.cursor = "crosshair";
+  };
+
+  render() {
     return (
       <div>
-        <div>
-        <Tab className="tab-header" panes={panes} renderActiveOnly={false} />
-      </div>
-     
-        
-        
+        <div className="leftAlign">
+          <Label className=" labelTag"> Load Saved</Label>
+          <Dropdown
+            onChange={this.loadFile}
+            inline
+            className="assignDrops"
+            options={this.state.files}
+            defaultValue={this.state.files[0].value}
+          />
+        </div>
+
+        <div className="rightAlign">
+          <Button onClick={this.saveArt}>Save</Button>
+          <div>
+            <div>
+              <div id="canvas" ref={this.myRef}></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
