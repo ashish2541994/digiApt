@@ -10,7 +10,7 @@ const Story = () => {
     };
 const Story2 = ({ action, isPaused }) => {
 	return <div style={{ ...contentStyle, background: 'Aquamarine', color: '#16161d' }}>
-		<h1 style={{ marginTop: '95%', marginBottom: 0 }}>Thanks For Giving Opportunity 🌝</h1>
+		<h1 style={{ marginTop: '85%', marginBottom: 0 }}>Thanks For Giving Opportunity 🌝</h1>
 		<h4>Have a Very Nice Day 🎉</h4>
 	</div>
 }
